@@ -1,0 +1,104 @@
+[
+  {
+    "id": "responsive-button-autolayout",
+    "title": "Simple Responsive Button",
+    "description": {
+      "short": "responsive button with auto layout",
+      "long": "A practical introduction to Figma's most powerful responsive tools. You will learn how to structure a button using <b>Auto Layout</b> to handle padding and alignment, and apply <b>Constraints</b> to ensure it adapts perfectly to any screen width."
+    },
+    "meta": {
+      "time": "10 min",
+      "level": "Beginner",
+      "thumbnailUrl": "https://placehold.co/600x400/EEE/31343C?text=Tuto+Thumbnail",
+      "objective": "Les Bases",
+      "technique": ["Auto Layout", "Styles", "Variables"],
+      "typeDeSavoir": "Pratique"
+    },
+    "steps": [
+      {
+        "stepId": 1,
+        "title": "Create the label",
+        "description": "Press <kbd>T</kbd>, click anywhere on the canvas, and type <code>Get Started</code>.",
+        "tip": "Always start with the text content before drawing a rectangle.",
+        "videoUrl": "/videos/tuto1-step1.mp4",
+        "assets": [
+          {
+            "name": "tuto1-step1-reference.png",
+            "type": "download",
+            "url": "/assets/tuto1-1.png"
+          }
+        ]
+      },
+      {
+        "stepId": 2,
+        "title": "Style the typography",
+        "description": "With the text selected, look at the <b>Text</b> section in the right sidebar.<br>Set the Font to <kbd>Inter</kbd>, Weight to <kbd>Medium</kbd>, and Size to <kbd>24px</kbd>.",
+        "videoUrl": "/videos/tuto1-step2.mp4"
+      },
+      {
+        "stepId": 3,
+        "title": "Add Auto Layout",
+        "description": "Press <kbd>Shift + A</kbd> to wrap the text in an Auto Layout frame. In the Layers panel (left), rename this frame to 'Button'.",
+        "tip": "Auto Layout allows the button to grow automatically if you change the text later.",
+        "videoUrl": "/videos/tuto1-step3.mp4"
+      },
+      {
+        "stepId": 4,
+        "title": "Adjust spacing and alignment",
+        "description": "Go to the Auto Layout section in the right sidebar:<ul><li>Set <b>Vertical Padding</b> to 16px.</li><li>Click the <b>Center Icon</b> in the alignment grid (middle dot).</li><li>Ensure Vertical Resizing is set to <b>Hug</b>.</li></ul>",
+        "tip": "Setting resizing to 'Hug' keeps the button container tight to the text size.",
+        "videoUrl": "/videos/tuto1-step4.mp4"
+      },
+      {
+        "stepId": 5,
+        "title": "Style the Button",
+        "description": "Let's make it pop. In the right sidebar:<ul><li><b>Fill:</b> Change 'Solid' to 'Linear'. Set top to <code>#AFD7FE</code> and bottom to <code>#8AC5FE</code>.</li><li><b>Stroke:</b> Click +. Set color to <code>#FFFFFF</code> (White) at <code>20%</code> opacity. Set position to <code>Inside</code>.</li><li><b>Corner Radius:</b> Set it to <code>16</code>.</li></ul>",
+        "videoUrl": "/videos/tuto1-step5.mp4",
+        "assets": [
+          { "name": "Top Color", "type": "copy", "url": "#AFD7FE" },
+          { "name": "Bottom Color", "type": "copy", "url": "#8AC5FE" }
+        ]
+      },
+      {
+        "stepId": 6,
+        "title": "Create the Phone Screen",
+        "description": "Press <kbd>F</kbd> to open the Frame tool. In the right sidebar, select <b>iPhone 14/15 Pro</b> (or any 393px width screen). Rename the frame to 'Screen'.",
+        "videoUrl": "/videos/tuto1-step6.mp4"
+      },
+      {
+        "stepId": 7,
+        "title": "Place the button",
+        "description": "Drag and drop your 'Button' inside the 'Screen' frame.",
+        "tip": "<b>Important:</b> Look at the Layers panel on the left. Ensure 'Button' is nested INSIDE 'Screen'.",
+        "videoUrl": "/videos/tuto1-step7.mp4"
+      },
+      {
+        "stepId": 8,
+        "title": "Set the Width",
+        "description": "We want a 20px margin on each side. Select the button. In the <b>W (Width)</b> field in the right sidebar, type: <code>393-40</code> and press Enter.",
+        "tip": "Figma calculates the math automatically to give you the perfect width (353px).",
+        "videoUrl": "/videos/tuto1-step8.mp4"
+      },
+      {
+        "stepId": 9,
+        "title": "Position the Button",
+        "description": "Let's place it perfectly at the bottom.<ul><li>Select the button and press <kbd>Alt + H</kbd> (Center horizontally).</li><li>Press <kbd>Alt + S</kbd> (Align bottom).</li><li>Hold <kbd>Shift</kbd> and press the <kbd>Up Arrow</kbd> key twice.</li></ul>",
+        "tip": "Holding Shift moves objects by 10px. Pressing it twice creates a 20px bottom margin.",
+        "videoUrl": "/videos/tuto1-step9.mp4"
+      },
+      {
+        "stepId": 10,
+        "title": "Set Constraints",
+        "description": "This is the magic step. Go to the <b>Constraints</b> tab (Right sidebar, top):<ul><li>Set Horizontal to <b>Left and Right</b>.</li><li>Set Vertical to <b>Bottom</b>.</li></ul>",
+        "tip": "<b>Result:</b> The button will now stretch if the screen gets wider, and stick to the bottom if the screen gets taller.",
+        "videoUrl": "/videos/tuto1-step10.mp4"
+      },
+      {
+        "stepId": 11,
+        "title": "Test your work",
+        "description": "Select the 'Screen' frame. Drag the right edge to make it wider or narrower. The button should stretch and shrink automatically!",
+        "videoUrl": "/videos/tuto1-step11.mp4"
+      }
+    ]
+  }
+]
