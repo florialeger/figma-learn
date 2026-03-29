@@ -87,16 +87,17 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
       }
     };
 
+    const updateDuration = () => updateProgress();
+
     const handlePlay = () => {
       setIsPlaying(true);
       startHideTimeout();
     };
-
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => video.play();
 
     video.addEventListener("timeupdate", updateProgress);
-    video.addEventListener("loadedmetadata", updateProgress);
+    video.addEventListener("loadedmetadata", updateDuration);
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("ended", handleEnded);
@@ -104,7 +105,7 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
     return () => {
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
       video.removeEventListener("timeupdate", updateProgress);
-      video.removeEventListener("loadedmetadata", updateProgress);
+      video.removeEventListener("loadedmetadata", updateDuration);
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
       video.removeEventListener("ended", handleEnded);
@@ -112,9 +113,13 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
   }, []);
 
   const togglePlayPause = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) videoRef.current.pause();
-    else videoRef.current.play();
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
   };
 
   const seekFromPointer = (clientX: number, target: HTMLDivElement) => {
@@ -137,7 +142,7 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
 
   return (
     <div
-      className="group relative h-full w-full overflow-hidden rounded-sm bg-muted"
+      className="relative h-full w-full rounded-sm bg-muted overflow-hidden group"
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -145,7 +150,7 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
       <video
         ref={videoRef}
         src={src}
-        className="z-0 h-full w-full object-cover"
+        className="h-full w-full object-cover z-0"
         autoPlay
         playsInline
         muted
@@ -154,13 +159,13 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
 
       {isHovering && (
         <div
-          className={`pointer-events-none absolute inset-0 z-10 bg-black/20 transition-opacity ${
+          className={`absolute inset-0 z-10 bg-black/20 transition-opacity pointer-events-none ${
             showControls ? "opacity-100" : "opacity-0"
           }`}
         >
           <button
             onClick={togglePlayPause}
-            className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? (
@@ -176,8 +181,8 @@ export function MinimalVideoPlayer({ src }: { src: string }) {
         onPointerDown={handleTimelinePointerDown}
         className={`absolute bottom-0 left-0 right-0 z-20 h-1 cursor-pointer bg-muted-foreground/20 transition-opacity ${
           isHovering
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div

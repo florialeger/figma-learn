@@ -2,12 +2,9 @@
 
 import { useMemo, useState } from "react";
 import type { Tutorial } from "@/types/tutorial";
+import { SearchAndFilters, type FilterState } from "./SearchAndFilters";
+import { TutorialGrid } from "./TutorialGrid";
 import type { FilterCategories } from "@/app/page";
-import {
-  SearchAndFilters,
-  type FilterState,
-} from "@/components/SearchAndFilters";
-import { TutorialGrid } from "@/components/TutorialGrid";
 
 export function HomeClient({
   tutorials,
@@ -74,7 +71,8 @@ export function HomeClient({
     if (filter.duration.length > 0) {
       list = list.filter((t) => {
         const minutes = getMinutesFromTime(t.meta.time);
-        return filter.duration.includes(getDurationRange(minutes));
+        const range = getDurationRange(minutes);
+        return filter.duration.includes(range);
       });
     }
 

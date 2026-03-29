@@ -36,7 +36,8 @@ function getCategorizedFilters(list: Tutorial[]): FilterCategories {
     if (t.meta.typeDeSavoir) typeDeSavoir.add(t.meta.typeDeSavoir);
     if (t.meta.time) {
       const minutes = getMinutesFromTime(t.meta.time);
-      durations.add(getDurationRange(minutes));
+      const range = getDurationRange(minutes);
+      durations.add(range);
     }
   });
 
@@ -67,8 +68,8 @@ export default function HomePage() {
           Les fondamentaux de Figma
         </h1>
         <p className="text-sm text-muted-foreground md:text-base">
-          Apprends a utiliser Figma a travers des tutoriels pratiques. Tout ce
-          que nous creerons sera fait dans les Design Files.
+          Apprends à utiliser Figma à travers des tutoriels pratiques. Tout ce
+          que nous créerons sera fait dans les Design Files.
         </p>
       </header>
 

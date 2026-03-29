@@ -33,6 +33,11 @@ const RESTORE = [
   ["\u0001kbd\u0001", "</kbd>"],
 ] as const;
 
+/**
+ * Renders HTML description with allowed tags only.
+ * Use <accent>word</accent> for special wording (body-accent style).
+ * Allowed: b, br, ul, li, code, kbd, accent.
+ */
 export function SafeHtml({
   html,
   className = "",
@@ -55,16 +60,13 @@ function sanitizeHtml(html: string): string {
   for (const [tag, ph] of PLACEHOLDERS) {
     out = out.split(tag).join(ph);
   }
-
   out = out
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
-
   for (const [ph, tag] of RESTORE) {
     out = out.split(ph).join(tag);
   }
-
   return out;
 }

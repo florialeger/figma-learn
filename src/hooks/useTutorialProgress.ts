@@ -45,7 +45,7 @@ export function useTutorialProgress(tutorialId: string | null) {
       setProgressMap(next);
       window.dispatchEvent(new CustomEvent("figma-edu-progress"));
     },
-    [tutorialId],
+    [tutorialId]
   );
 
   const markWatched = useCallback(() => {
@@ -64,7 +64,6 @@ export function useTutorialProgress(tutorialId: string | null) {
 
 export function useAllProgress(): ProgressMap {
   const [map, setMap] = useState<ProgressMap>(() => readStorage());
-
   useEffect(() => {
     const sync = () => setMap(readStorage());
     sync();
@@ -75,6 +74,5 @@ export function useAllProgress(): ProgressMap {
       window.removeEventListener("storage", sync);
     };
   }, []);
-
   return map;
 }

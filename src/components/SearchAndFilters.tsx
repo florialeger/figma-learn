@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { FilterCategories } from "@/app/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckIcon } from "@/components/ui/check";
 import { ChevronDownIcon } from "@/components/ui/chevron-down";
 import { SearchIcon } from "@/components/ui/search";
 import { XIcon } from "@/components/ui/x";
+import type { FilterCategories } from "@/app/page";
 
 export type FilterState = {
   query: string;
@@ -71,7 +71,7 @@ function MultiSelectFilterButton({
             className="mb-1 w-full rounded-sm px-2 py-1.5 text-left text-xs text-muted-foreground hover:bg-accent"
             onClick={hasSelection ? onClear : onSelectAll}
           >
-            {hasSelection ? "Tout Deselectionner" : "Tout Selectionner"}
+            {hasSelection ? "Tout Déselectionner" : "Tout Sélectionner"}
           </button>
           <div className="max-h-56 space-y-1 overflow-auto">
             {options.map((option) => {
@@ -182,7 +182,6 @@ export function SearchAndFilters({
             aria-label="Recherche"
           />
         </div>
-
         <div className="pointer-events-auto flex flex-wrap items-center gap-2 lg:ml-auto">
           <MultiSelectFilterButton
             label="Mon objectif"
@@ -242,7 +241,7 @@ export function SearchAndFilters({
           />
 
           <MultiSelectFilterButton
-            label="Duree"
+            label="Durée"
             options={filterCategories.durations}
             selected={state.duration}
             onClear={() => onChange({ ...state, duration: [] })}
@@ -275,7 +274,6 @@ export function SearchAndFilters({
               {filter.label}
             </Button>
           ))}
-
           {hasFilters && (
             <div className="ml-auto">
               <Button

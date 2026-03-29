@@ -24,7 +24,11 @@ export function DopamineButton({
   );
 
   useEffect(() => {
-    setShowPostActions(progress === "finished");
+    if (progress === "finished") {
+      setShowPostActions(true);
+    } else {
+      setShowPostActions(false);
+    }
   }, [progress]);
 
   const handleComplete = () => {
@@ -34,10 +38,16 @@ export function DopamineButton({
     }
 
     markFinished();
-    confetti({ particleCount: 120, spread: 70, origin: { y: 0.8 } });
+    confetti({
+      particleCount: 120,
+      spread: 70,
+      origin: { y: 0.8 },
+    });
 
     setShowPostActions(false);
-    window.setTimeout(() => setShowPostActions(true), 2000);
+    window.setTimeout(() => {
+      setShowPostActions(true);
+    }, 2000);
   };
 
   return (
@@ -49,7 +59,7 @@ export function DopamineButton({
             Retour aux tutoriels
           </>
         ) : (
-          "Marquer ce tutoriel comme termine !"
+          "Marquer ce tutoriel comme terminé !"
         )}
       </Button>
 
@@ -60,7 +70,7 @@ export function DopamineButton({
               <Button
                 asChild
                 type="button"
-                className="bg-[#0d99ff] text-white hover:bg-[#0b89e6]"
+                className="bg-[#0d99ff] hover:bg-[#0b89e6] text-white"
               >
                 <Link href={`/tuto/${nextTutorialId}`}>
                   Faire le prochain tutoriel

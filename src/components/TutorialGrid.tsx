@@ -18,8 +18,8 @@ export function TutorialGrid({ tutorials }: { tutorials: Tutorial[] }) {
         </Card>
       ) : (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {tutorials.map((tutorial) => (
-            <TutorialCard key={tutorial.id} tutorial={tutorial} />
+          {tutorials.map((t) => (
+            <TutorialCard key={t.id} tutorial={t} />
           ))}
         </div>
       )}

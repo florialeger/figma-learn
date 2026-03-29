@@ -6,16 +6,15 @@ import type { Tutorial, TutorialStep } from "@/types/tutorial";
 import { useTutorialProgress } from "@/hooks/useTutorialProgress";
 import { SafeHtml } from "@/lib/safe-html";
 import { DopamineButton } from "@/components/DopamineButton";
-import { MinimalVideoPlayer } from "@/components/MinimalVideoPlayer";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { ArrowLeftIcon } from "@/components/ui/arrow-left";
-import { DownloadIcon } from "@/components/ui/download";
-import { CopyIcon } from "@/components/ui/copy";
-import { CheckIcon, type CheckIconHandle } from "@/components/ui/check";
-import { CircleHelpIcon } from "@/components/ui/circle-help";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
+import { ScrollArea } from "./ui/scroll-area";
+import { ArrowLeftIcon } from "./ui/arrow-left";
+import { DownloadIcon } from "./ui/download";
+import { CopyIcon } from "./ui/copy";
+import { CheckIcon, type CheckIconHandle } from "./ui/check";
+import { CircleHelpIcon } from "./ui/circle-help";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,14 +24,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Kbd } from "@/components/ui/kbd";
+} from "./ui/alert-dialog";
+import { Kbd } from "./ui/kbd";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "./ui/tooltip";
+import { MinimalVideoPlayer } from "./MinimalVideoPlayer";
 
 function getMediaType(url: string): "image" | "video" {
   const ext = url.split(".").pop()?.toLowerCase() || "";
@@ -142,21 +142,20 @@ export function TutorialPageClient({
   return (
     <div className="mx-auto grid max-w-4xl gap-6 px-4 py-8 lg:grid-cols-[220px_1fr]">
       <aside className="hidden lg:block">
-        <div className="fixed left-4 top-2 space-y-5">
+        <div className="fixed top-2 left-4 space-y-5">
           <Button
             asChild
             variant="ghost"
-            className="h-auto w-full justify-start px-2 py-1.5"
+            className="w-full justify-start px-2 py-1.5 h-auto"
           >
             <Link href="/" className="flex items-center gap-2">
               <ArrowLeftIcon size={16} className="text-current" />
-              Retour a l&apos;accueil
+              Retour à l&apos;accueil
             </Link>
           </Button>
-
           <ScrollArea className="h-[calc(100vh-150px)] rounded-md border">
             <div className="space-y-2 p-3">
-              <p className="text-sm font-semibold">Etapes</p>
+              <p className="text-sm font-semibold">Étapes</p>
               <ul className="space-y-1">
                 {tutorial.steps.map((step) => (
                   <li key={step.stepId}>
@@ -183,11 +182,11 @@ export function TutorialPageClient({
           <Button
             asChild
             variant="ghost"
-            className="h-auto w-full justify-start px-2 py-1.5"
+            className="w-full justify-start px-2 py-1.5 h-auto"
           >
             <Link href="/" className="flex items-center gap-2">
               <ArrowLeftIcon size={16} className="text-current" />
-              Retour a l&apos;accueil
+              Retour à l&apos;accueil
             </Link>
           </Button>
         </div>
@@ -226,11 +225,10 @@ export function TutorialPageClient({
                 onClick={() => downloadAssets(downloadableAssets)}
               >
                 <DownloadIcon size={16} className="text-current" />
-                Telecharger tous les assets
+                Télécharger tous les assets
               </Button>
             )}
           </div>
-
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
@@ -248,7 +246,6 @@ export function TutorialPageClient({
                 <CopyIcon size={16} className="text-current" />
               )}
             </Button>
-
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
@@ -259,7 +256,6 @@ export function TutorialPageClient({
                   <CircleHelpIcon size={16} className="text-current" />
                 </Button>
               </AlertDialogTrigger>
-
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
@@ -391,7 +387,7 @@ function StepBlock({
     await copyTextToClipboard(value);
     updateTooltipForCodeElement(codeElement);
     setTooltipOpen(true);
-    setTooltipLabel("Copie");
+    setTooltipLabel("Copié");
 
     if (copiedInlineTimeoutRef.current) {
       window.clearTimeout(copiedInlineTimeoutRef.current);
@@ -430,19 +426,18 @@ function StepBlock({
                       variant="secondary"
                       size="icon"
                       onClick={onDownloadStepAssets}
-                      aria-label="Telecharger les assets de cette etape"
+                      aria-label="Télécharger les assets de cette étape"
                     >
                       <DownloadIcon size={16} className="text-current" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="top" sideOffset={8}>
-                    Telecharger les assets de cette etape
+                    Télécharger les assets de cette étape
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             )}
           </div>
-
           <div className="relative py-1" ref={descriptionRef}>
             <TooltipProvider delayDuration={120}>
               <Tooltip open={tooltipOpen}>
@@ -494,25 +489,6 @@ function StepBlock({
               </div>
             </CardContent>
           </Card>
-        )}
-
-        {step.assets && step.assets.length > 0 && (
-          <div className="grid gap-2 sm:grid-cols-2">
-            {step.assets
-              .filter((asset) => !asset.url.startsWith("#"))
-              .map((asset) => (
-                <Card key={asset.name} className="overflow-hidden">
-                  <CardContent className="p-2">
-                    <div className="mb-2 text-xs text-muted-foreground">
-                      {asset.name}
-                    </div>
-                    <div className="aspect-video overflow-hidden rounded-sm bg-muted">
-                      <MediaPlayer src={asset.url} alt={asset.name} />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
         )}
       </div>
     </section>

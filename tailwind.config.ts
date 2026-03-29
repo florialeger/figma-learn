@@ -42,7 +42,7 @@ const config: Config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        }
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
